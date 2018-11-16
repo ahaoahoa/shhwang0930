@@ -1,38 +1,54 @@
 from django.shortcuts import render
 
-# Create your views here.
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+import random
 
-
-#second
 
 def keyboard(request):
-
     return JsonResponse({
-        "type": "buttons", "text"
-        "buttons": ["강아지 사료양"]
+        'type': 'buttons',
+        'buttons': ['밥류', '고기류']
     })
 
-@csrf_exempt #보안
-def answer(request):
 
+@csrf_exempt
+def answer(request):
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     datacontent = received_json_data['content']
 
-    if datacontent == "강아지 사료양":
-        global section
-        section = '사료1'
+    if datacontent == '밥류':
+        ricelist = ['등촌칼국수', '전주식당', '맘보', '알촌', '디왈리', '준호네 부대찌개', '경원분식', '아토', '육연차']
+        rice_rand = random.randrange(0, 10)
+        rice = ricelist[rice_rand]
 
         return JsonResponse({
             'message': {
-                'text': "강아지의 몸무게(kg)를 알려주세요!"
+                'text': rice
             },
             'keyboard': {
-                'type': 'text'
+                'type': 'buttons',
+                'buttons': ['밥류', '고기류']
             }
+
+        })
+
+    elif datacontent == '고기류':
+        meatlist = ['포크포크', '태평돈가스', '치킨스팟', '내가 찜한 닭', '태평곱창']
+        meat_rand = random.randrange(0, 5)
+        meat = meatlist[meat_rand]
+
+        return JsonResponse({
+            'message': {
+                'text': meat
+            },
+            'keyboard': {
+                'type': 'buttons',
+                'buttons': ['밥류', '고기류']
+            }
+
         })
