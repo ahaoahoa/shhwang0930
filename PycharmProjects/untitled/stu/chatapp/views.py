@@ -10,9 +10,6 @@ import random
 
 def keyboard(request):
     return JsonResponse({
-        'message':{
-            'text':'드시고 싶은 메뉴를 골라주세요'
-        },
         'type': 'buttons',
         'buttons': ['밥류', '고기류']
     })
