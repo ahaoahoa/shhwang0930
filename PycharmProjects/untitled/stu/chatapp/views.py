@@ -31,7 +31,7 @@ def answer(request):
 
         return JsonResponse({
             'message': {
-                'text': rice
+                'text': ricelsit,'와 같은 메뉴가 있습니다.\n 제가 추천해드릴 메뉴는', rice, '입니다.'
             },
             'keyboard': {
                 'type': 'buttons',
@@ -47,7 +47,7 @@ def answer(request):
 
         return JsonResponse({
             'message': {
-                'text': meat
+                'text': meatlist,'와 같은 메뉴가 있습니다.\n 제가 추천해드릴 메뉴는', meat, '입니다.'
             },
             'keyboard': {
                 'type': 'buttons',
